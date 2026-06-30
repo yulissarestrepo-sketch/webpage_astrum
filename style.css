@@ -254,10 +254,8 @@ header ul a:hover{
     position: absolute;
     top: 0;
     width: 100%;
-    height: 130vh;
     display: flex;
     justify-content: center;
-    overflow: hidden;
     z-index: -1;
     mix-blend-mode: lighten;
   }
@@ -1165,21 +1163,6 @@ header ul a:hover{
 
 
 
-@media (max-aspect-ratio: 16/9){
-    .back-vid{
-        width: auto;
-        height: 100%;
-    }
-}
-
-@media (min-aspect-ratio: 16/9){
-    .back-vid{
-        width: 100%;
-        height: auto;
-    }
-}
-
-
 @media screen and (max-width: 1200px){
     .blackhole-box video{
         margin-top: -20%;
@@ -1320,13 +1303,15 @@ header ul a:hover{
 
     .project-vidbox video{
         width: 250px;
-        margin-left: -100px;
+        margin-left: 0;
     }
 
     .project-info{
         overflow: hidden;
         padding-left: 0;
-        margin-left: -50px;
+        margin-left: 0;
+        text-align: center;
+        align-items: center;
     }
 
     .project-info h1{
@@ -1352,7 +1337,8 @@ header ul a:hover{
 
     .project-card{
         flex-direction: column;
-        margin-left: 25%;
+        margin-left: 0;
+        align-items: center;
         gap: 30px;
     }
     
@@ -1362,10 +1348,6 @@ header ul a:hover{
 
     .project-info{
         width: 85%;
-    }
-
-    .project-info h1{
-        text-wrap: nowrap;
     }
 
     .project-info p{
@@ -1395,7 +1377,8 @@ header ul a:hover{
     }
 
     .social-box{
-        margin-left: -90px;
+        align-items: center;
+        text-align: center;
     }
 }
 
@@ -1458,7 +1441,7 @@ header ul a:hover{
 
     .card h1{
         bottom: 30%;
-        font-size: 5px;
+        font-size: 16px;
     }
 
     .project-card {
