@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo - Red Astrum</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+</head>
+
+<body>
+    <div class="container">
+        <video class="back-vid" autoplay loop muted playsinline src="videos/galaxy.mp4"></video>
+
+        <!-- NAVBAR (igual al index) -->
+        <header data-aos="fade-down" data-aos-duration="2000">
+            <div class="left">
+                <img src="images/logo_1_red.png" alt="logo Red Astrum">
+                <h2><span style="color: var(--color-primary);">Red</span> Astrum</h2>
+            </div>
+            <ul class="main">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#">Acerca de <i class='bx bx-chevron-down'></i></a>
+                    <ul>
+                        <li><a href="about.html">Sobre nosotros</a></li>
+                        <li><a href="team.html">Equipo</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="box-icons">
+                <a href="https://www.facebook.com/share/18Cic6fYTM/" target="_blank" aria-label="Facebook"><i
+                        class='bx bxl-facebook-circle'></i></a>
+                <a href="https://www.instagram.com/red_astrum?igsh=cGxwdHd5OWY2c2w1" target="_blank"
+                    aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                <a href="https://www.linkedin.com/company/red-astrum?trk=blended-typeahead" target="_blank"
+                    aria-label="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
+            </div>
+            <div class="menu-icon"><i class='bx bx-menu'></i></div>
+        </header>
+
+        <div class="sidebar">
+            <div class="close-icon"><i class='bx bx-x'></i></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="team.html">Equipo</a></li>
+                <li><a href="#">ONGs</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <div class="social-sidebar">
+                <a href="https://www.facebook.com/share/18Cic6fYTM/" target="_blank"><i class='bx bxl-facebook'></i></a>
+                <a href="https://www.instagram.com/red_astrum?igsh=cGxwdHd5OWY2c2w1" target="_blank"><i
+                        class='bx bxl-instagram'></i></a>
+                <a href="https://www.linkedin.com/company/red-astrum?trk=blended-typeahead" target="_blank"><i
+                        class='bx bxl-linkedin-square'></i></a>
+            </div>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="team-page">
+
+            <div class="team-hero" data-aos="fade-down" data-aos-duration="1000">
+                <h1>Nuestro <span class="gradient">Equipo</span></h1>
+                <p>Conoce a las personas detrás de la Red Astrum, comprometidas con transformar la educación en
+                    Latinoamérica.</p>
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="team-controls" data-aos="fade-up" data-aos-duration="800">
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="search-input" placeholder="Buscar por nombre...">
+                </div>
+
+                <div class="filter-pills" id="filter-pills">
+                    <button class="pill" data-filter="Todos">Todos</button>
+                    <button class="pill active" data-filter="Fundadores">Fundadores</button>
+                    <button class="pill" data-filter="Secretaría">Secretaría</button>
+                    <button class="pill" data-filter="Gestión Comunidad">Gestión Comunidad</button>
+                    <button class="pill" data-filter="Áreas de Apoyo">Áreas de Apoyo</button>
+                    <button class="pill" data-filter="Consejo Supremo">Consejo Supremo</button>
+                </div>
+            </div>
+
+            <p class="results-count" id="results-count">Mostrando <span id="count-num">0</span> integrantes</p>
+
+            <!-- GRID -->
+            <div class="team-grid" id="team-grid"></div>
+
+            <!-- ESTADO VACÍO -->
+            <div class="empty-state" id="empty-state">
+                <i class='bx bx-user-x'></i>
+                <p>No se encontraron integrantes con ese filtro.</p>
+            </div>
+
+        </div>
+
+        <section class="footer">
+            <h1>© 2026 Red Astrum. Todos los derechos reservados.</h1>
+            <div class="box-icons">
+                <a href="https://www.facebook.com/share/18Cic6fYTM/" target="_blank" aria-label="Facebook"><i
+                        class='bx bxl-facebook-circle'></i></a>
+                <a href="https://www.instagram.com/red_astrum?igsh=cGxwdHd5OWY2c2w1" target="_blank"
+                    aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                <a href="https://www.linkedin.com/company/red-astrum?trk=blended-typeahead" target="_blank"
+                    aria-label="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Toggle submenú "Acerca de" al hacer clic
+        document.querySelectorAll('.main > li > a').forEach(function (link) {
+            var parent = link.parentElement;
+            if (parent.querySelector('ul')) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var isOpen = parent.classList.contains('open');
+                    document.querySelectorAll('.main > li.open').forEach(function (li) {
+                        li.classList.remove('open');
+                    });
+                    if (!isOpen) parent.classList.add('open');
+                });
+            }
+        });
+
+        // Cerrar al hacer clic fuera
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('header')) {
+                document.querySelectorAll('.main > li.open').forEach(function (li) {
+                    li.classList.remove('open');
+                });
+            }
+        });
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        /* ══════════════════════════════════════════
+           DATOS DEL EQUIPO — PLANTILLA
+           Para agregar o editar un integrante, copia un
+           bloque { } y completa estos campos:
+
+           nombre:      Nombre completo
+           rol:         Cargo dentro de Red Astrum
+           area:        Debe coincidir EXACTAMENTE con una
+                        de las pestañas de filtro:
+                        "Fundadores" | "Secretaría" |
+                        "Gestión Comunidad" | "Áreas de Apoyo" |
+                        "Consejo Supremo"
+           descripcion: 1-2 frases sobre la persona.
+                        Déjalo "" si no quieres mostrar nada.
+           foto:        ruta a la imagen (ej: "images/claudio.jpg")
+                        Déjalo "" para mostrar sus iniciales.
+           redes:       sus redes sociales. Deja "" en las que
+                        no tenga — solo se muestra el ícono de
+                        las que sí completes.
+                        Disponibles: linkedin, instagram,
+                        facebook, twitter, tiktok, email
+        ══════════════════════════════════════════ */
+        const teamMembers = [
+            {
+                nombre: "Claudio Zapata",
+                rol: "Co-fundador",
+                area: "Fundadores",
+                descripcion: "",
+                foto: "images/Claudio.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/claudio-roberto-zapata-pizango-b4a750345/",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Fabio Alfaro",
+                rol: "Co-fundador",
+                area: "Fundadores",
+                descripcion: "",
+                foto: "images/Fabio.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/fabioalfarojauregui/",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Jesús Gálvez",
+                rol: "Co-fundador",
+                area: "Fundadores",
+                descripcion: "",
+                foto: "",
+                redes: {
+                    linkedin: "",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Jhosany Lazo",
+                rol: "Secretaría",
+                area: "Secretaría",
+                descripcion: "",
+                foto: "images/Jhosany.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/belen-lazo-alegre-831740282",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Manuel Palomino",
+                rol: "Co-fundador",
+                area: "Fundadores",
+                descripcion: "",
+                foto: "images/Manuel.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/manuel-palomino-309451382",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Valeria Cama",
+                rol: "Gestión de Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Valeria.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/valeria-cama-cabrera-5b43723a3",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Brendi Imán",
+                rol: "Secretaría",
+                area: "Secretaría",
+                descripcion: "",
+                foto: "",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/brendi-imán-valdiviezo-9b7192369/ ",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Marilyn Cordova",
+                rol: "Gestión Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Marilyn.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/marilyn-leonela-cordova-bejarano-3571653b9",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Alison Roman",
+                rol: "Gestión Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Alison.png",
+                redes: {
+                    linkedin: "",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Julibeth Román",
+                rol: "Gestión Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Julibeth.png",
+                redes: {
+                    linkedin: "",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Viviana Alférez",
+                rol: "Gestión Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Viviana.png",
+                redes: {
+                    linkedin: "",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Yaiza Rojas",
+                rol: "Gestión Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Yaiza.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/yaiza-rojas-a9486a346",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Sebastian Zapata",
+                rol: "Gestión Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Sebastian.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/sebastian-zapata-29382640a/",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Allison Canales",
+                rol: "Gestión Comunidad",
+                area: "Gestión Comunidad",
+                descripcion: "",
+                foto: "images/Allison.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/alisson-canales-1bab55343",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Yulissa Restrepo Arango",
+                rol: "Tecnología & Informática",
+                area: "Áreas de Apoyo",
+                descripcion: "",
+                foto: "images/Yulissa.png",
+                redes: {
+                    linkedin: "",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Amy Maldonado",
+                rol: "Tecnología & Informática",
+                area: "Áreas de Apoyo",
+                descripcion: "",
+                foto: "images/Amy.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/~amymaldonadoj ",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+            {
+                nombre: "Valeria Rivas",
+                rol: "Marketing",
+                area: "Áreas de Apoyo",
+                descripcion: "",
+                foto: "images/ValeriaRivas.png",
+                redes: {
+                    linkedin: "https://www.linkedin.com/in/valeria-rivas-hurtado-3222a23b0/ ",
+                    instagram: "",
+                    facebook: "",
+                    twitter: "",
+                    tiktok: "",
+                    email: ""
+                }
+            },
+        ];
+
+        /* Ícono de boxicons para cada red social disponible */
+        const socialIcons = {
+            linkedin: "bxl-linkedin",
+            instagram: "bxl-instagram",
+            facebook: "bxl-facebook",
+            twitter: "bxl-twitter",
+            tiktok: "bxl-tiktok",
+            email: "bx-envelope"
+        };
+
+        function renderSocials(redes) {
+            if (!redes) return "";
+            return Object.keys(redes)
+                .filter(key => redes[key] && redes[key].trim() !== "")
+                .map(key => {
+                    const icon = socialIcons[key] || "bx-link";
+                    const href = key === "email" ? `mailto:${redes[key]}` : redes[key];
+                    return `<a href="${href}" target="_blank" class="social-icon" aria-label="${key}"><i class='bx ${icon}'></i></a>`;
+                })
+                .join("");
+        }
+
+        /* ══ Renderizado ══ */
+        function getInitials(name) {
+            return name.split(" ").slice(0, 2).map(w => w[0]).join("").toUpperCase();
+        }
+
+        function renderCards(members) {
+            const grid = document.getElementById("team-grid");
+            const empty = document.getElementById("empty-state");
+            const countEl = document.getElementById("count-num");
+
+            grid.innerHTML = "";
+
+            if (members.length === 0) {
+                empty.style.display = "flex";
+                countEl.textContent = "0";
+                return;
+            }
+
+            empty.style.display = "none";
+            countEl.textContent = members.length;
+
+            members.forEach((m, i) => {
+                const hasPhoto = m.foto && m.foto.trim() !== "";
+
+                const avatarContent = hasPhoto
+                    ? `<img src="${m.foto}" alt="Foto de ${m.nombre}" loading="lazy">`
+                    : getInitials(m.nombre);
+
+                const avatarClass = hasPhoto ? "member-avatar" : "member-avatar no-photo";
+
+                const descripcionHtml = (m.descripcion && m.descripcion.trim() !== "")
+                    ? `<p class="member-description">${m.descripcion}</p>`
+                    : "";
+
+                const socialsHtml = renderSocials(m.redes);
+
+                const card = document.createElement("div");
+                card.className = "member-card";
+                card.setAttribute("data-area", m.area);
+                card.setAttribute("data-name", m.nombre.toLowerCase());
+                card.setAttribute("data-aos", "fade-up");
+                card.setAttribute("data-aos-delay", (i % 3) * 80);
+
+                card.innerHTML = `
+                    <div class="${avatarClass}">
+                        ${avatarContent}
+                    </div>
+                    <span class="member-area">${m.area}</span>
+                    <h3 class="member-name">${m.nombre}</h3>
+                    <p class="member-role">${m.rol}</p>
+                    ${descripcionHtml}
+                    ${socialsHtml ? `<div class="member-socials">${socialsHtml}</div>` : ""}
+                `;
+
+                grid.appendChild(card);
+            });
+
+            AOS.refresh();
+        }
+
+        /* ══ Filtrado ══ */
+        let activeFilter = "Fundadores";
+        let searchQuery = "";
+
+        function applyFilters() {
+            const filtered = teamMembers.filter(m => {
+                const matchArea = activeFilter === "Todos" || m.area === activeFilter;
+                const matchName = m.nombre.toLowerCase().includes(searchQuery);
+                return matchArea && matchName;
+            });
+            renderCards(filtered);
+        }
+
+
+        document.getElementById("filter-pills").addEventListener("click", e => {
+            const pill = e.target.closest(".pill");
+            if (!pill) return;
+            document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
+            activeFilter = pill.dataset.filter;
+            applyFilters();
+        });
+
+        /* Búsqueda */
+        document.getElementById("search-input").addEventListener("input", e => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            applyFilters();
+        });
+
+        /* Carga inicial */
+        applyFilters();
+    </script>
+</body>
+
+</html>
